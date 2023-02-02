@@ -17,7 +17,7 @@ import org.testcontainers.utility.DockerImageName;
 public class KauaTesteE2E {
 
     @Container
-    private static final MySQLContainer mysql = new MySQLContainer(DockerImageName.parse("mysql:latest"))
+    private static final MySQLContainer<?> mysql = new MySQLContainer(DockerImageName.parse("mysql:latest"))
             .withPassword("123456")
             .withUsername("root")
             .withDatabaseName("adm_videos");
@@ -25,6 +25,8 @@ public class KauaTesteE2E {
     @DynamicPropertySource
     public static void setDatasourceProperties(final DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", mysql::getJdbcUrl);
+        registry.add("spring.datasource.username", mysql::getUsername);
+        registry.add("spring.datasource.password", mysql::getPassword);
     }
 
     @Test
