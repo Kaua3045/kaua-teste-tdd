@@ -27,7 +27,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '19'
-        distribution: 'java'
+        distribution: 'oracle'
     - name: Teste with Gradle
       run: ./gradlew test
     - name: Build with Gradle
